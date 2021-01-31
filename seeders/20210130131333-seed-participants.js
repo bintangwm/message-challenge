@@ -14,6 +14,18 @@ module.exports = {
         conv_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        user_id: 1,
+        conv_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        conv_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]
     await queryInterface.bulkInsert('Participants', participant)

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Message, { foreignKey: 'user_id' })
       User.hasMany(models.Participant, { foreignKey: 'user_id' })
+      // User.hasMany(models.Conversation, { through: 'Participant' })
     }
   };
   User.init({
