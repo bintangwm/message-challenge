@@ -4,6 +4,7 @@ A challenge to make simple messaging feature
 * RESTful endpoint for asset's CRUD operation
 * JSON formatted response
 * Builts using Node.Js; Express; PostgreSQL; Sequelize ORM
+* link deploy: https://bwm-messaging-feature.herokuapp.com/
 
 &nbsp;
 
