@@ -20,12 +20,9 @@ class MessageController {
       next(err)
     }
   }
-
-  // buat pesan
-  // cari dulu apakah ada conv? pakai user_id dan to_user
-  // 
+  
   static async createMessage (req, res, next) {
-    let { user_id, conv_id, content, to_user, reply_to } = req.body
+    let { user_id, conv_id, content, to_user } = req.body
     let payload = {
       user_id, content
     }
@@ -111,10 +108,9 @@ class MessageController {
             conv_found = true
           }
         });
-        console.log(conv_id + '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ini dia');
-        console.log(conv_found);
+        
         if (!conv_found) {
-          throw { status: 404, msg: 'not allowed to reply!' }
+          throw { status: 401, msg: 'not allowed to reply!' }
         } else {
           const payload = {
             user_id, content, conv_id, reply_msg_id
