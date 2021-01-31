@@ -16,7 +16,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Conversation.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'conversation name cannot be empty!'
+        }
+      }
+    },
     last_msg: DataTypes.STRING
   }, {
     sequelize,
