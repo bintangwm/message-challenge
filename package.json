@@ -1,0 +1,30 @@
+{
+  "name": "message-challenge",
+  "version": "1.0.0",
+  "description": "A challenge to make simple messaging feature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bintangwm/message-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bintangwm/message-challenge/issues"
+  },
+  "homepage": "https://github.com/bintangwm/message-challenge#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
