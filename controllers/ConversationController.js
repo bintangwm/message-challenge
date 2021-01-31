@@ -1,7 +1,6 @@
-const { User, Conversation, Participant } = require('../models')
-const Sequelize = require('sequelize');
-const user = require('../models/user');
-const Op = Sequelize.Op;
+const { User, Conversation, Participant, Message } = require('../models')
+// const Sequelize = require('sequelize');
+// const Op = Sequelize.Op;
 
 class ConversationController {
   static async getAllConversation (req, res, next) {
@@ -36,12 +35,20 @@ class ConversationController {
     const options = {
       include: [
         {
-          model: Participant
+          model: Message,
+          required: true
+        },
+        {
+          model: Participant,
+          required: true
         }
       ]
     }
     try {
       const conversations = await Conversation.findByPk(conv_id ,options)
+      if (!conversations) {
+        throw { status: 404, msg: 'conversation not found!' }
+      }
       res.status(200).json(conversations)
     } catch (err) {
       next(err)
