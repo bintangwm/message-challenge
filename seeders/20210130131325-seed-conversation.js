@@ -7,6 +7,10 @@ module.exports = {
         name: 'A-B',
         createdAt: new Date(),
         updatedAt: new Date()
+      },{
+        name: 'A-C',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]
     await queryInterface.bulkInsert('Conversations', conv)

@@ -16,6 +16,13 @@ module.exports = {
         content: 'Hai juga B',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        conv_id: 2,
+        content: 'Ini percakapan A-C',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]
     await queryInterface.bulkInsert('Messages', messages)
