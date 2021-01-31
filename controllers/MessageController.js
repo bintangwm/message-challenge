@@ -1,7 +1,7 @@
 const { Message, User, Conversation, Participant } = require('../models')
 
 class MessageController {
-  static async getAllMessage (req, res) {
+  static async getAllMessage (req, res, next) {
     const options = {
       include: [{ model: Message, as: "reply" }],
       order: [['id', 'DESC']]
@@ -10,15 +10,14 @@ class MessageController {
       const messages = await Message.findAll(options)
       res.status(200).json({ messages })
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err)
+      next(err)
     }
   }
 
   // buat pesan
   // cari dulu apakah ada conv? pakai user_id dan to_user
   // 
-  static async createMessage (req, res) {
+  static async createMessage (req, res, next) {
     let { user_id, conv_id, content, to_user, reply_to } = req.body
     let payload = {
       user_id, content
@@ -31,17 +30,15 @@ class MessageController {
       } else if (conv_id) {
         conv = await Participant.findOne({ where: { conv_id, user_id }})
         if (!conv) {
-          res.status(404).json({ msg: 'conversation not found'})
+          throw { status: 400, msg: 'conversation not found' }
         } else {
           payload.conv_id = conv_id
           if (reply_to) {
             payload.reply_msg_id = reply_to
             console.log('reply');
             message = await Message.create(payload)
-            res.status(200).json({ message })
           } else {
             message = await Message.create(payload)
-            res.status(200).json({ message })
           }
         }
       } else {
@@ -67,10 +64,8 @@ class MessageController {
             payload.reply_msg_id = reply_to
             console.log('reply');
             message = await Message.create(payload)
-            res.status(200).json({ message })
           } else {
             message = await Message.create(payload)
-            res.status(200).json({ message })
           }
         } else {
           // buat conv
@@ -94,11 +89,10 @@ class MessageController {
           payload.conv_id = conv_id
           message = await Message.create(payload)
         }
-        res.status(200).json({ conv, conv_id })
+        res.status(201).json({ message })
       }
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err)
+      next(err)
     }
   }
 }

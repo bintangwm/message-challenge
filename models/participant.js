@@ -16,8 +16,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Participant.init({
-    user_id: DataTypes.INTEGER,
-    conv_id: DataTypes.INTEGER
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: {
+          args: true,
+          msg: 'Insert a valid user ID!'
+        },
+      }
+    },
+    conv_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        isInt: {
+          args: true,
+          isInt: 'Insert a valid conversation ID!'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Participant',

@@ -17,10 +17,46 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Message.init({
-    content: DataTypes.STRING,
-    user_id: DataTypes.INTEGER,
-    conv_id: DataTypes.INTEGER,
-    reply_msg_id: DataTypes.INTEGER
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'message cannot be empty!'
+        }
+      }
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: {
+          args: true,
+          msg: 'Insert a valid user ID!'
+        },
+      }
+    },
+    conv_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        isInt: {
+          args: true,
+          isInt: 'Insert a valid conversation ID!'
+        }
+      }
+    },
+    reply_msg_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        isInt: {
+          args: true,
+          isInt: 'Insert a valid conversation ID!'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Message',

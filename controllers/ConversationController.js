@@ -4,7 +4,7 @@ const user = require('../models/user');
 const Op = Sequelize.Op;
 
 class ConversationController {
-  static async getAllConversation (req, res) {
+  static async getAllConversation (req, res, next) {
     const { user_id } = req.body
     const options = {
       include: [
@@ -27,11 +27,11 @@ class ConversationController {
       const conversations = await Conversation.findAll(options)
       res.status(200).json(conversations)
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   }
 
-  static async getConvById (req, res) {
+  static async getConvById (req, res, next) {
     const conv_id = +req.params.id
     const options = {
       include: [
@@ -44,7 +44,7 @@ class ConversationController {
       const conversations = await Conversation.findByPk(conv_id ,options)
       res.status(200).json(conversations)
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   }
 }
